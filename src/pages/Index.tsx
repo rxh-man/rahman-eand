@@ -74,7 +74,14 @@ const Index = () => {
       {/* Header */}
       <div className="bg-red-900 text-white p-6 shadow-lg">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-3xl font-bold mb-2">e& Field Operations Governance Dashboard</h1>
+          <div className="flex items-center gap-4 mb-2">
+            <img 
+              src="/lovable-uploads/784dc15f-9c14-4254-94d4-cbc874804c85.png" 
+              alt="e& enterprise logo" 
+              className="h-12 w-auto"
+            />
+            <h1 className="text-3xl font-bold">Field Operations Governance Dashboard</h1>
+          </div>
           <p className="text-red-100 text-lg">QA Scope and Resource Insights</p>
         </div>
       </div>
