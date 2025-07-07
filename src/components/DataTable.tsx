@@ -14,6 +14,13 @@ export const DataTable = ({ data }: DataTableProps) => {
   const [sortField, setSortField] = useState<keyof QATask>("projectId");
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
 
+  // Filter out tasks with any "Missing" values
+  const filteredData = data.filter(task => 
+    task.labour !== "Missing" && 
+    task.equipment !== "Missing" && 
+    task.cars !== "Missing"
+  );
+
   const handleSort = (field: keyof QATask) => {
     if (sortField === field) {
       setSortDirection(sortDirection === "asc" ? "desc" : "asc");
@@ -23,7 +30,7 @@ export const DataTable = ({ data }: DataTableProps) => {
     }
   };
 
-  const sortedData = [...data].sort((a, b) => {
+  const sortedData = [...filteredData].sort((a, b) => {
     const aValue = a[sortField];
     const bValue = b[sortField];
     
@@ -33,10 +40,6 @@ export const DataTable = ({ data }: DataTableProps) => {
       return bValue.localeCompare(aValue);
     }
   });
-
-  const isResourceMissing = (task: QATask) => {
-    return task.labour === "Missing" || task.equipment === "Missing" || task.cars === "Missing";
-  };
 
   const getFrequencyBadgeColor = (frequency: string) => {
     switch (frequency.toLowerCase()) {
@@ -67,7 +70,7 @@ export const DataTable = ({ data }: DataTableProps) => {
       <CardHeader className="bg-gradient-to-r from-red-900 to-red-800 text-white rounded-t-lg">
         <CardTitle className="flex items-center gap-2">
           <LayoutDashboard className="h-5 w-5" />
-          QA Tasks Data Explorer
+          QA Tasks Data Explorer (Complete Resource Allocation Only)
         </CardTitle>
       </CardHeader>
       <CardContent className="p-0">
@@ -103,8 +106,8 @@ export const DataTable = ({ data }: DataTableProps) => {
                 <tr
                   key={task.id}
                   className={`border-b border-red-100 hover:bg-red-50 transition-colors ${
-                    isResourceMissing(task) ? 'bg-red-50 border-l-4 border-l-red-500' : ''
-                  } ${index % 2 === 0 ? 'bg-white' : 'bg-red-25'}`}
+                    index % 2 === 0 ? 'bg-white' : 'bg-red-25'
+                  }`}
                 >
                   <td className="p-3 border-r border-red-100">
                     <Badge variant="outline" className="border-red-200 text-red-700">
@@ -125,17 +128,17 @@ export const DataTable = ({ data }: DataTableProps) => {
                     </Badge>
                   </td>
                   <td className="p-3 border-r border-red-100">
-                    <span className={`text-sm ${task.labour === "Missing" ? 'text-red-500 font-semibold' : 'text-gray-700'}`}>
+                    <span className="text-sm text-gray-700">
                       {task.labour}
                     </span>
                   </td>
                   <td className="p-3 border-r border-red-100">
-                    <span className={`text-sm ${task.equipment === "Missing" ? 'text-red-500 font-semibold' : 'text-gray-700'}`}>
+                    <span className="text-sm text-gray-700">
                       {task.equipment}
                     </span>
                   </td>
                   <td className="p-3">
-                    <span className={`text-sm ${task.cars === "Missing" ? 'text-red-500 font-semibold' : 'text-gray-700'}`}>
+                    <span className="text-sm text-gray-700">
                       {task.cars}
                     </span>
                   </td>
@@ -148,8 +151,8 @@ export const DataTable = ({ data }: DataTableProps) => {
         {sortedData.length === 0 && (
           <div className="text-center py-12 text-red-600">
             <LayoutDashboard className="h-12 w-12 mx-auto mb-4 opacity-50" />
-            <p className="text-lg font-medium">No tasks match your current filters</p>
-            <p className="text-sm opacity-75">Try adjusting your search criteria</p>
+            <p className="text-lg font-medium">No tasks with complete resource allocation found</p>
+            <p className="text-sm opacity-75">All tasks are missing required resources</p>
           </div>
         )}
       </CardContent>
