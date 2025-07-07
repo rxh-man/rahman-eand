@@ -11,124 +11,461 @@ export interface QATask {
 }
 
 export const mockData: QATask[] = [
+  // Digital Payments Tasks
   {
     id: "1",
     projectId: "Digital Payments",
-    scope: "Site visits",
-    details: "Conduct quarterly assessment of digital payment terminal installations and verify merchant compliance",
-    frequency: "Monthly",
-    labour: "2 QA Technicians",
-    equipment: "Laptop, Testing Kit",
-    cars: "1 Vehicle"
+    scope: "Documents Validation",
+    details: "Inspection of all details mentioned in DNs",
+    frequency: "Daily",
+    labour: "1 QA Technician",
+    equipment: "1 Laptop",
+    cars: "1 car"
   },
   {
     id: "2",
     projectId: "Digital Payments",
-    scope: "Performance tracking",
-    details: "Monitor transaction success rates and system uptime across all payment gateways",
+    scope: "Performance",
+    details: "Analytics for overall progress",
     frequency: "Daily",
-    labour: "1 Performance Analyst",
-    equipment: "Monitoring Dashboard",
-    cars: "Not Required"
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
   },
   {
     id: "3",
-    projectId: "AMI Projects",
-    scope: "Documents Validation",
-    details: "Review and validate smart meter deployment documentation and compliance certificates",
-    frequency: "Weekly",
-    labour: "1 Documentation Specialist",
+    projectId: "Digital Payments",
+    scope: "Performance",
+    details: "Analytics for Individual progress",
+    frequency: "Daily",
+    labour: "Missing",
     equipment: "Missing",
     cars: "Missing"
   },
   {
     id: "4",
-    projectId: "AMI Projects",
-    scope: "Site visits",
-    details: "Physical inspection of AMI infrastructure and data collection units",
-    frequency: "Monthly",
-    labour: "3 Field Engineers",
-    equipment: "Tablet, Measurement Tools",
-    cars: "2 Vehicles"
+    projectId: "Digital Payments",
+    scope: "Performance",
+    details: "SLA Target And Root causes for preachment",
+    frequency: "Daily/Weekly",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
   },
   {
     id: "5",
-    projectId: "CCTV Projects",
-    scope: "HSE Compliance Check",
-    details: "Ensure all CCTV installations meet health, safety, and environmental standards",
+    projectId: "Digital Payments",
+    scope: "Performance",
+    details: "Merchant feedback",
     frequency: "Weekly",
-    labour: "2 HSE Inspectors",
-    equipment: "Safety Equipment, Checklist",
-    cars: "1 Vehicle"
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
   },
   {
     id: "6",
-    projectId: "CCTV Projects",
-    scope: "Performance tracking",
-    details: "Monitor camera uptime, image quality, and recording system performance",
-    frequency: "Daily",
+    projectId: "Digital Payments",
+    scope: "Performance",
+    details: "Client (Bank) satisfaction survey",
+    frequency: "Monthly",
     labour: "Missing",
-    equipment: "Monitoring System",
-    cars: "Not Required"
+    equipment: "Missing",
+    cars: "Missing"
   },
   {
     id: "7",
-    projectId: "Smart Facilities",
-    scope: "Site visits",
-    details: "Inspect smart building automation systems and IoT sensor networks",
-    frequency: "Monthly",
-    labour: "2 IoT Specialists",
-    equipment: "Diagnostic Tools, Laptop",
-    cars: "1 Vehicle"
+    projectId: "Digital Payments",
+    scope: "Trackers and Documentation",
+    details: "All documents including trackers, inventory files, logs, etc. to be validated",
+    frequency: "Daily",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
   },
   {
     id: "8",
-    projectId: "Smart Facilities",
-    scope: "Documents Validation",
-    details: "Validate energy efficiency reports and system configuration documentation",
-    frequency: "Monthly",
-    labour: "1 Technical Reviewer",
+    projectId: "Digital Payments",
+    scope: "Products/Services",
+    details: "Sampling Devices for defects after production",
+    frequency: "Daily",
+    labour: "Missing",
     equipment: "Missing",
-    cars: "Not Required"
+    cars: "Missing"
   },
   {
     id: "9",
     projectId: "Digital Payments",
-    scope: "HSE Compliance Check",
-    details: "Safety audit of payment processing centers and server facilities",
-    frequency: "Monthly",
-    labour: "1 Safety Auditor",
-    equipment: "Safety Checklist, PPE",
-    cars: "Missing"
+    scope: "Site visits",
+    details: "2 visits for warehouse Audit",
+    frequency: "Weekly",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Not Required"
   },
   {
     id: "10",
-    projectId: "AMI Projects",
-    scope: "Performance tracking",
-    details: "Analyze meter reading accuracy and data transmission reliability",
-    frequency: "Weekly",
-    labour: "2 Data Analysts",
-    equipment: "Analytics Software",
+    projectId: "Digital Payments",
+    scope: "HSE Compliance Check",
+    details: "Not required",
+    frequency: "Not Required",
+    labour: "Not Required",
+    equipment: "Not Required",
     cars: "Not Required"
   },
+
+  // AMI Projects Tasks
   {
     id: "11",
-    projectId: "CCTV Projects",
+    projectId: "AMI Projects",
     scope: "Documents Validation",
-    details: "Review installation certificates and maintenance schedules",
-    frequency: "Weekly",
-    labour: "Missing",
-    equipment: "Document Scanner",
-    cars: "Not Required"
+    details: "Inspection of all details and photos mentioned in Proof Documents",
+    frequency: "Daily",
+    labour: "1 QA Engineer",
+    equipment: "5 Laptops",
+    cars: "5 cars"
   },
   {
     id: "12",
+    projectId: "AMI Projects",
+    scope: "Installation & Monitoring Verification",
+    details: "Ensure physical set-up is done per technical layout",
+    frequency: "Daily",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+  {
+    id: "13",
+    projectId: "AMI Projects",
+    scope: "Performance",
+    details: "Analytics for overall progress",
+    frequency: "Daily",
+    labour: "4 QA Technician",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+  {
+    id: "14",
+    projectId: "AMI Projects",
+    scope: "Performance",
+    details: "Analytics for Individual progress",
+    frequency: "Daily",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+  {
+    id: "15",
+    projectId: "AMI Projects",
+    scope: "Performance",
+    details: "SLA Target And Root causes for preachment",
+    frequency: "Daily/Weekly",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+  {
+    id: "16",
+    projectId: "AMI Projects",
+    scope: "Performance",
+    details: "Client satisfaction survey",
+    frequency: "Monthly",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+  {
+    id: "17",
+    projectId: "AMI Projects",
+    scope: "Trackers and Documentation",
+    details: "All documents including trackers, inventory files, logs, etc. to be validated",
+    frequency: "Daily",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+  {
+    id: "18",
+    projectId: "AMI Projects",
+    scope: "Site visits",
+    details: "3 visits for Site Audit / technician",
+    frequency: "Daily",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+  {
+    id: "19",
+    projectId: "AMI Projects",
+    scope: "Site visits",
+    details: "Visual Inspection for Damage",
+    frequency: "Daily",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+  {
+    id: "20",
+    projectId: "AMI Projects",
+    scope: "Site visits",
+    details: "2 visits for warehouse Audit",
+    frequency: "Weekly",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+  {
+    id: "21",
+    projectId: "AMI Projects",
+    scope: "HSE Compliance Check",
+    details: "Inspection of PPEs and HSE standards adherence",
+    frequency: "Daily",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+  {
+    id: "22",
+    projectId: "AMI Projects",
+    scope: "HSE Compliance Check",
+    details: "Ensure proper signage, safe wiring, no exposure risks",
+    frequency: "Daily",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+
+  // CCTV Projects Tasks
+  {
+    id: "23",
+    projectId: "CCTV Projects",
+    scope: "Documents Validation",
+    details: "Inspection of all details and photos mentioned in Proof Documents",
+    frequency: "Daily",
+    labour: "1 QA Engineer",
+    equipment: "3 Laptops",
+    cars: "5 cars"
+  },
+  {
+    id: "24",
+    projectId: "CCTV Projects",
+    scope: "Installation & Monitoring Verification",
+    details: "Ensure physical set-up is done per technical layout",
+    frequency: "Daily",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+  {
+    id: "25",
+    projectId: "CCTV Projects",
+    scope: "Performance",
+    details: "Analytics for overall progress",
+    frequency: "Daily",
+    labour: "2 QA Technician",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+  {
+    id: "26",
+    projectId: "CCTV Projects",
+    scope: "Performance",
+    details: "Analytics for Individual progress",
+    frequency: "Daily",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+  {
+    id: "27",
+    projectId: "CCTV Projects",
+    scope: "Performance",
+    details: "SLA Target And Root causes for preachment",
+    frequency: "Daily/Weekly",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+  {
+    id: "28",
+    projectId: "CCTV Projects",
+    scope: "Performance",
+    details: "Client satisfaction survey",
+    frequency: "Monthly",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+  {
+    id: "29",
+    projectId: "CCTV Projects",
+    scope: "Trackers and Documentation",
+    details: "All documents including trackers, inventory files, logs, etc. to be validated",
+    frequency: "Daily",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+  {
+    id: "30",
+    projectId: "CCTV Projects",
+    scope: "Site visits",
+    details: "3 visits for Site Audit / technician",
+    frequency: "Daily",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+  {
+    id: "31",
+    projectId: "CCTV Projects",
+    scope: "Site visits",
+    details: "2 visits for warehouse Audit",
+    frequency: "Weekly",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+  {
+    id: "32",
+    projectId: "CCTV Projects",
+    scope: "Site visits",
+    details: "Visual Inspection for Damage",
+    frequency: "Daily",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+  {
+    id: "33",
+    projectId: "CCTV Projects",
+    scope: "HSE Compliance Check",
+    details: "Inspection of PPEs and HSE standards adherence",
+    frequency: "Daily",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+  {
+    id: "34",
+    projectId: "CCTV Projects",
+    scope: "HSE Compliance Check",
+    details: "Ensure proper signage, safe wiring, no exposure risks",
+    frequency: "Daily",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+
+  // Smart Facilities Tasks
+  {
+    id: "35",
+    projectId: "Smart Facilities",
+    scope: "Documents Validation",
+    details: "Inspection of all details and photos mentioned in Proof Documents",
+    frequency: "Daily",
+    labour: "2 QA Technician",
+    equipment: "2 Laptops",
+    cars: "2 cars"
+  },
+  {
+    id: "36",
+    projectId: "Smart Facilities",
+    scope: "Installation & Monitoring Verification",
+    details: "Ensure physical set-up is done per technical layout",
+    frequency: "Daily",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+  {
+    id: "37",
+    projectId: "Smart Facilities",
+    scope: "Performance",
+    details: "Analytics for overall progress",
+    frequency: "Daily",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+  {
+    id: "38",
+    projectId: "Smart Facilities",
+    scope: "Performance",
+    details: "Analytics for Individual progress",
+    frequency: "Daily",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+  {
+    id: "39",
+    projectId: "Smart Facilities",
+    scope: "Performance",
+    details: "SLA Target And Root causes for preachment",
+    frequency: "Daily/Weekly",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+  {
+    id: "40",
+    projectId: "Smart Facilities",
+    scope: "Performance",
+    details: "Client satisfaction survey",
+    frequency: "Monthly",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+  {
+    id: "41",
+    projectId: "Smart Facilities",
+    scope: "Trackers and Documentation",
+    details: "All documents including trackers, inventory files, logs, etc. to be validated",
+    frequency: "Daily",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+  {
+    id: "42",
+    projectId: "Smart Facilities",
+    scope: "Site visits",
+    details: "3 visits for Site Audit / technician",
+    frequency: "Daily",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+  {
+    id: "43",
+    projectId: "Smart Facilities",
+    scope: "Site visits",
+    details: "2 visits for warehouse Audit",
+    frequency: "Weekly",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+  {
+    id: "44",
+    projectId: "Smart Facilities",
+    scope: "Site visits",
+    details: "Visual Inspection for Damage",
+    frequency: "Daily",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
+  },
+  {
+    id: "45",
     projectId: "Smart Facilities",
     scope: "HSE Compliance Check",
-    details: "Environmental impact assessment of smart facility installations",
-    frequency: "Monthly",
-    labour: "1 Environmental Specialist",
-    equipment: "Environmental Sensors",
-    cars: "1 Vehicle"
+    details: "Inspection of PPEs and HSE standards adherence",
+    frequency: "Daily",
+    labour: "Missing",
+    equipment: "Missing",
+    cars: "Missing"
   }
 ];
