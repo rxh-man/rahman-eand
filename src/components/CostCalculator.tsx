@@ -2,86 +2,82 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { QATask } from "@/data/mockData";
-import { Calculator, DollarSign, TrendingUp, PieChart } from "lucide-react";
+import { Calculator, DollarSign, TrendingUp, PieChart, Users } from "lucide-react";
 
 interface CostCalculatorProps {
   data: QATask[];
   selectedProject: string;
 }
 
-// Cost data based on the uploaded Excel - matching exact values
+// Cost data based on the exact data provided - matching your calculations
 const costData = {
   "Digital Payments": {
-    qaEngineerRate: 65000, // AED per year
-    qaEngineerCount: 1,
-    qaTechnicianRate: 45000, // AED per year
-    qaTechnicianCount: 0,
-    laptopCost: 8000, // AED per unit
-    laptopCount: 1,
-    carCost: 120000, // AED per year per car
-    carCount: 1,
-    siteCost: 13800, // AED
-    totalWorkload: 25000,
-    nationalGovernmentCost: 141000, // Total from Excel
-    hseOfficerCost: 60000,
-    qaEngineerCost: 65000,
-    hseOfficerCount: 1,
-    assetsPaxCost: 13800,
-    carFuelCost: 120000
+    siteVisitsPerQA: 1,
+    warehouseVisitsPerQA: 1,
+    yearlyWorkload: 12,
+    rationalGroupSize: 2,
+    requiredSiteVisits: 2,
+    qaEngineerActual: 1,
+    qaEngineerRounded: 1,
+    qaSupervisorRequired: 0,
+    hseOfficerRequired: 0,
+    qaEngineerCost: 72000,
+    hseOfficerCost: 0,
+    qaSupervisorCost: 0,
+    assetsOneTime: 3200,
+    carFuelDataAllowance: 31200,
+    total: 106400
   },
   "AMI Projects": {
-    qaEngineerRate: 65000,
-    qaEngineerCount: 1,
-    qaTechnicianRate: 45000,
-    qaTechnicianCount: 4,
-    laptopCost: 8000,
-    laptopCount: 5,
-    carCost: 120000,
-    carCount: 5,
-    siteCost: 13800,
-    totalWorkload: 25000,
-    nationalGovernmentCost: 923000, // Total from Excel
-    hseOfficerCost: 60000,
-    qaEngineerCost: 65000,
-    hseOfficerCount: 1,
-    assetsPaxCost: 53800,
-    carFuelCost: 600000
+    siteVisitsPerQA: 1056,
+    warehouseVisitsPerQA: 96,
+    yearlyWorkload: 50000,
+    rationalGroupSize: 25,
+    requiredSiteVisits: 2000,
+    qaEngineerActual: 1.89,
+    qaEngineerRounded: 2,
+    qaSupervisorRequired: 1,
+    hseOfficerRequired: 2,
+    qaEngineerCost: 144000,
+    hseOfficerCost: 120000,
+    qaSupervisorCost: 84000,
+    assetsOneTime: 18500,
+    carFuelDataAllowance: 156000,
+    total: 520500
   },
   "CCTV Projects": {
-    qaEngineerRate: 65000,
-    qaEngineerCount: 1,
-    qaTechnicianRate: 45000,
-    qaTechnicianCount: 2,
-    laptopCost: 8000,
-    laptopCount: 3,
-    carCost: 120000,
-    carCount: 5,
-    siteCost: 13800,
-    totalWorkload: 25000,
-    nationalGovernmentCost: 748000, // Total from Excel
+    siteVisitsPerQA: 1056,
+    warehouseVisitsPerQA: 96,
+    yearlyWorkload: 660,
+    rationalGroupSize: 3,
+    requiredSiteVisits: 220,
+    qaEngineerActual: 0.21,
+    qaEngineerRounded: 2,
+    qaSupervisorRequired: 1,
+    hseOfficerRequired: 1,
+    qaEngineerCost: 144000,
     hseOfficerCost: 60000,
-    qaEngineerCost: 65000,
-    hseOfficerCount: 1,
-    assetsPaxCost: 33800,
-    carFuelCost: 600000
+    qaSupervisorCost: 84000,
+    assetsOneTime: 13800,
+    carFuelDataAllowance: 124800,
+    total: 426600
   },
   "Smart Facilities": {
-    qaEngineerRate: 65000,
-    qaEngineerCount: 0,
-    qaTechnicianRate: 45000,
-    qaTechnicianCount: 2,
-    laptopCost: 8000,
-    laptopCount: 2,
-    carCost: 120000,
-    carCount: 2,
-    siteCost: 13800,
-    totalWorkload: 25000,
-    nationalGovernmentCost: 358000, // Total from Excel
+    siteVisitsPerQA: 1056,
+    warehouseVisitsPerQA: 96,
+    yearlyWorkload: 2100,
+    rationalGroupSize: 10,
+    requiredSiteVisits: 210,
+    qaEngineerActual: 0.70,
+    qaEngineerRounded: 1,
+    qaSupervisorRequired: 1,
+    hseOfficerRequired: 1,
+    qaEngineerCost: 72000,
     hseOfficerCost: 60000,
-    qaEngineerCost: 0,
-    hseOfficerCount: 1,
-    assetsPaxCost: 28800,
-    carFuelCost: 240000
+    qaSupervisorCost: 84000,
+    assetsOneTime: 10250,
+    carFuelDataAllowance: 93600,
+    total: 319850
   }
 };
 
@@ -106,7 +102,9 @@ export const CostCalculator = ({ data, selectedProject }: CostCalculatorProps) =
     );
   }
 
-  const project = costData[selectedProject as keyof typeof costData];
+  // Map CCTV Projects to Security Systems Projects for data lookup
+  const projectKey = selectedProject === "CCTV Projects" ? "CCTV Projects" : selectedProject;
+  const project = costData[projectKey as keyof typeof costData];
 
   if (!project) {
     return (
@@ -127,12 +125,6 @@ export const CostCalculator = ({ data, selectedProject }: CostCalculatorProps) =
     );
   }
 
-  // Calculate individual cost components based on Excel data
-  const labourCost = project.qaEngineerCost + (project.qaTechnicianCount * project.qaTechnicianRate) + project.hseOfficerCost;
-  const equipmentCost = project.laptopCount * project.laptopCost;
-  const carCostTotal = project.carFuelCost;
-  const totalCost = project.nationalGovernmentCost;
-
   return (
     <Card className="shadow-lg border-red-100">
       <CardHeader className="bg-gradient-to-r from-red-900 to-red-800 text-white rounded-t-lg">
@@ -150,40 +142,40 @@ export const CostCalculator = ({ data, selectedProject }: CostCalculatorProps) =
               <DollarSign className="h-5 w-5 text-green-600" />
             </div>
             <div className="text-2xl font-bold text-green-900">
-              {totalCost.toLocaleString()} AED
+              {project.total.toLocaleString()} AED
             </div>
           </div>
 
-          {/* Labour Cost */}
+          {/* Labour Cost (Staff) */}
           <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-lg border border-blue-200">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-blue-700 font-medium">Labour Cost</span>
-              <TrendingUp className="h-5 w-5 text-blue-600" />
+              <span className="text-blue-700 font-medium">Staff Cost</span>
+              <Users className="h-5 w-5 text-blue-600" />
             </div>
             <div className="text-2xl font-bold text-blue-900">
-              {labourCost.toLocaleString()} AED
+              {(project.qaEngineerCost + project.hseOfficerCost + project.qaSupervisorCost).toLocaleString()} AED
             </div>
           </div>
 
-          {/* Equipment Cost */}
+          {/* Assets Cost (One-time) */}
           <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-lg border border-purple-200">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-purple-700 font-medium">Equipment Cost</span>
+              <span className="text-purple-700 font-medium">Assets (One-time)</span>
               <PieChart className="h-5 w-5 text-purple-600" />
             </div>
             <div className="text-2xl font-bold text-purple-900">
-              {equipmentCost.toLocaleString()} AED
+              {project.assetsOneTime.toLocaleString()} AED
             </div>
           </div>
 
-          {/* Car Cost */}
+          {/* Car + Fuel + Data */}
           <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-4 rounded-lg border border-orange-200">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-orange-700 font-medium">Car Cost</span>
+              <span className="text-orange-700 font-medium">Car + Fuel + Data</span>
               <TrendingUp className="h-5 w-5 text-orange-600" />
             </div>
             <div className="text-2xl font-bold text-orange-900">
-              {carCostTotal.toLocaleString()} AED
+              {project.carFuelDataAllowance.toLocaleString()} AED
             </div>
           </div>
         </div>
@@ -193,20 +185,39 @@ export const CostCalculator = ({ data, selectedProject }: CostCalculatorProps) =
           <h3 className="text-lg font-semibold text-red-900 mb-4">Resource Allocation</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center">
-              <div className="text-2xl font-bold text-red-900">{project.qaEngineerCount}</div>
+              <div className="text-2xl font-bold text-red-900">{project.qaEngineerRounded}</div>
               <Badge variant="outline" className="border-red-300 text-red-700">QA Engineers</Badge>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-red-900">{project.qaTechnicianCount}</div>
-              <Badge variant="outline" className="border-red-300 text-red-700">QA Technicians</Badge>
+              <div className="text-2xl font-bold text-red-900">{project.qaSupervisorRequired}</div>
+              <Badge variant="outline" className="border-red-300 text-red-700">QA Supervisors</Badge>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-red-900">{project.laptopCount}</div>
-              <Badge variant="outline" className="border-red-300 text-red-700">Laptops</Badge>
+              <div className="text-2xl font-bold text-red-900">{project.hseOfficerRequired}</div>
+              <Badge variant="outline" className="border-red-300 text-red-700">HSE Officers</Badge>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-red-900">{project.carCount}</div>
-              <Badge variant="outline" className="border-red-300 text-red-700">Cars</Badge>
+              <div className="text-2xl font-bold text-red-900">{project.yearlyWorkload.toLocaleString()}</div>
+              <Badge variant="outline" className="border-red-300 text-red-700">Yearly Workload</Badge>
+            </div>
+          </div>
+        </div>
+
+        {/* Workload Details */}
+        <div className="mt-4 bg-gray-50 p-4 rounded-lg border border-gray-200">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Project Workload Details</h3>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+            <div>
+              <span className="text-gray-600">Site Visits/QA/Year:</span>
+              <div className="font-semibold">{project.siteVisitsPerQA.toLocaleString()}</div>
+            </div>
+            <div>
+              <span className="text-gray-600">Warehouse Visits/QA/Year:</span>
+              <div className="font-semibold">{project.warehouseVisitsPerQA}</div>
+            </div>
+            <div>
+              <span className="text-gray-600">Required Site Visits/Year:</span>
+              <div className="font-semibold">{project.requiredSiteVisits.toLocaleString()}</div>
             </div>
           </div>
         </div>
