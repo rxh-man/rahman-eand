@@ -12,6 +12,7 @@ import { ResourceHeatmap } from "@/components/ResourceHeatmap";
 import { ScopeDistribution } from "@/components/ScopeDistribution";
 import { FrequencyChart } from "@/components/FrequencyChart";
 import { MissingResourceChart } from "@/components/MissingResourceChart";
+import { CostCalculator } from "@/components/CostCalculator";
 import { mockData, type QATask } from "@/data/mockData";
 import { Filter, Download, RotateCcw } from "lucide-react";
 
@@ -195,6 +196,9 @@ const Index = () => {
 
         {/* KPI Summary Cards */}
         <KPICards data={filteredData} />
+
+        {/* Cost Calculator Section */}
+        <CostCalculator data={filteredData} selectedProject={selectedProject} />
 
         {/* Charts Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
