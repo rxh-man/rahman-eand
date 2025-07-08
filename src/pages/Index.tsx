@@ -1,4 +1,3 @@
-
 import { useState, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -201,11 +200,10 @@ const Index = () => {
         <CostCalculator data={filteredData} selectedProject={selectedProject} />
 
         {/* Charts Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <ResourceHeatmap data={filteredData} />
           <ScopeDistribution data={filteredData} />
           <FrequencyChart data={filteredData} />
-          <MissingResourceChart data={filteredData} />
         </div>
 
         {/* Data Table */}

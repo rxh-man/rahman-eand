@@ -9,7 +9,7 @@ interface CostCalculatorProps {
   selectedProject: string;
 }
 
-// Cost data based on the uploaded Excel image - each project separate
+// Cost data based on the uploaded Excel - matching exact values
 const costData = {
   "Digital Payments": {
     qaEngineerRate: 65000, // AED per year
@@ -22,7 +22,12 @@ const costData = {
     carCount: 1,
     siteCost: 13800, // AED
     totalWorkload: 25000,
-    nationalGovernmentCost: 124800
+    nationalGovernmentCost: 141000, // Total from Excel
+    hseOfficerCost: 60000,
+    qaEngineerCost: 65000,
+    hseOfficerCount: 1,
+    assetsPaxCost: 13800,
+    carFuelCost: 120000
   },
   "AMI Projects": {
     qaEngineerRate: 65000,
@@ -35,7 +40,12 @@ const costData = {
     carCount: 5,
     siteCost: 13800,
     totalWorkload: 25000,
-    nationalGovernmentCost: 383000
+    nationalGovernmentCost: 923000, // Total from Excel
+    hseOfficerCost: 60000,
+    qaEngineerCost: 65000,
+    hseOfficerCount: 1,
+    assetsPaxCost: 53800,
+    carFuelCost: 600000
   },
   "CCTV Projects": {
     qaEngineerRate: 65000,
@@ -48,7 +58,12 @@ const costData = {
     carCount: 5,
     siteCost: 13800,
     totalWorkload: 25000,
-    nationalGovernmentCost: 293000
+    nationalGovernmentCost: 748000, // Total from Excel
+    hseOfficerCost: 60000,
+    qaEngineerCost: 65000,
+    hseOfficerCount: 1,
+    assetsPaxCost: 33800,
+    carFuelCost: 600000
   },
   "Smart Facilities": {
     qaEngineerRate: 65000,
@@ -61,7 +76,12 @@ const costData = {
     carCount: 2,
     siteCost: 13800,
     totalWorkload: 25000,
-    nationalGovernmentCost: 233000
+    nationalGovernmentCost: 358000, // Total from Excel
+    hseOfficerCost: 60000,
+    qaEngineerCost: 0,
+    hseOfficerCount: 1,
+    assetsPaxCost: 28800,
+    carFuelCost: 240000
   }
 };
 
@@ -107,10 +127,10 @@ export const CostCalculator = ({ data, selectedProject }: CostCalculatorProps) =
     );
   }
 
-  // Calculate individual cost components
-  const labourCost = (project.qaEngineerCount * project.qaEngineerRate) + (project.qaTechnicianCount * project.qaTechnicianRate);
+  // Calculate individual cost components based on Excel data
+  const labourCost = project.qaEngineerCost + (project.qaTechnicianCount * project.qaTechnicianRate) + project.hseOfficerCost;
   const equipmentCost = project.laptopCount * project.laptopCost;
-  const carCostTotal = project.carCount * project.carCost;
+  const carCostTotal = project.carFuelCost;
   const totalCost = project.nationalGovernmentCost;
 
   return (
