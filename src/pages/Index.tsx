@@ -1,3 +1,4 @@
+
 import { useState, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -10,7 +11,6 @@ import { DataTable } from "@/components/DataTable";
 import { ResourceHeatmap } from "@/components/ResourceHeatmap";
 import { ScopeDistribution } from "@/components/ScopeDistribution";
 import { FrequencyChart } from "@/components/FrequencyChart";
-import { MissingResourceChart } from "@/components/MissingResourceChart";
 import { CostCalculator } from "@/components/CostCalculator";
 import { mockData, type QATask } from "@/data/mockData";
 import { Filter, Download, RotateCcw } from "lucide-react";
