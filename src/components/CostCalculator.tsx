@@ -9,7 +9,7 @@ interface CostCalculatorProps {
   selectedProject: string;
 }
 
-// Cost data based on the uploaded image
+// Cost data based on the uploaded Excel image - each project separate
 const costData = {
   "Digital Payments": {
     qaEngineerRate: 65000, // AED per year
@@ -17,7 +17,9 @@ const costData = {
     qaTechnicianRate: 45000, // AED per year
     qaTechnicianCount: 0,
     laptopCost: 8000, // AED per unit
+    laptopCount: 1,
     carCost: 120000, // AED per year per car
+    carCount: 1,
     siteCost: 13800, // AED
     totalWorkload: 25000,
     nationalGovernmentCost: 124800
@@ -28,7 +30,9 @@ const costData = {
     qaTechnicianRate: 45000,
     qaTechnicianCount: 4,
     laptopCost: 8000,
+    laptopCount: 5,
     carCost: 120000,
+    carCount: 5,
     siteCost: 13800,
     totalWorkload: 25000,
     nationalGovernmentCost: 383000
@@ -39,7 +43,9 @@ const costData = {
     qaTechnicianRate: 45000,
     qaTechnicianCount: 2,
     laptopCost: 8000,
+    laptopCount: 3,
     carCost: 120000,
+    carCount: 5,
     siteCost: 13800,
     totalWorkload: 25000,
     nationalGovernmentCost: 293000
@@ -50,7 +56,9 @@ const costData = {
     qaTechnicianRate: 45000,
     qaTechnicianCount: 2,
     laptopCost: 8000,
+    laptopCount: 2,
     carCost: 120000,
+    carCount: 2,
     siteCost: 13800,
     totalWorkload: 25000,
     nationalGovernmentCost: 233000
@@ -58,62 +66,29 @@ const costData = {
 };
 
 export const CostCalculator = ({ data, selectedProject }: CostCalculatorProps) => {
-  // Calculate costs for selected project or all projects
-  const calculateCosts = () => {
-    if (selectedProject === "all") {
-      // Calculate total for all projects
-      let totalCost = 0;
-      let totalQAEngineers = 0;
-      let totalQATechnicians = 0;
-      let totalLaptops = 0;
-      let totalCars = 0;
+  // Only show cost for specific project, not "all"
+  if (selectedProject === "all") {
+    return (
+      <Card className="shadow-lg border-red-100">
+        <CardHeader className="bg-gradient-to-r from-red-900 to-red-800 text-white rounded-t-lg">
+          <CardTitle className="flex items-center gap-2">
+            <Calculator className="h-5 w-5" />
+            Cost Calculator
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="p-6">
+          <div className="text-center py-12 text-red-600">
+            <Calculator className="h-12 w-12 mx-auto mb-4 opacity-50" />
+            <p className="text-lg font-medium">Please select a specific project to view cost details</p>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
 
-      Object.values(costData).forEach(project => {
-        totalCost += project.nationalGovernmentCost;
-        totalQAEngineers += project.qaEngineerCount;
-        totalQATechnicians += project.qaTechnicianCount;
-        totalLaptops += (project.qaEngineerCount + project.qaTechnicianCount);
-        totalCars += 5; // Assuming 5 cars per project based on data
-      });
+  const project = costData[selectedProject as keyof typeof costData];
 
-      return {
-        totalCost,
-        breakdown: {
-          qaEngineers: totalQAEngineers,
-          qaTechnicians: totalQATechnicians,
-          laptops: totalLaptops,
-          cars: totalCars,
-          labourCost: (totalQAEngineers * 65000) + (totalQATechnicians * 45000),
-          equipmentCost: totalLaptops * 8000,
-          carCost: totalCars * 120000
-        }
-      };
-    } else {
-      // Calculate for specific project
-      const project = costData[selectedProject as keyof typeof costData];
-      if (!project) return null;
-
-      const laptops = project.qaEngineerCount + project.qaTechnicianCount;
-      const cars = selectedProject === "Digital Payments" ? 1 : 5;
-
-      return {
-        totalCost: project.nationalGovernmentCost,
-        breakdown: {
-          qaEngineers: project.qaEngineerCount,
-          qaTechnicians: project.qaTechnicianCount,
-          laptops,
-          cars,
-          labourCost: (project.qaEngineerCount * project.qaEngineerRate) + (project.qaTechnicianCount * project.qaTechnicianRate),
-          equipmentCost: laptops * project.laptopCost,
-          carCost: cars * project.carCost
-        }
-      };
-    }
-  };
-
-  const costs = calculateCosts();
-
-  if (!costs) {
+  if (!project) {
     return (
       <Card className="shadow-lg border-red-100">
         <CardHeader className="bg-gradient-to-r from-red-900 to-red-800 text-white rounded-t-lg">
@@ -132,12 +107,18 @@ export const CostCalculator = ({ data, selectedProject }: CostCalculatorProps) =
     );
   }
 
+  // Calculate individual cost components
+  const labourCost = (project.qaEngineerCount * project.qaEngineerRate) + (project.qaTechnicianCount * project.qaTechnicianRate);
+  const equipmentCost = project.laptopCount * project.laptopCost;
+  const carCostTotal = project.carCount * project.carCost;
+  const totalCost = project.nationalGovernmentCost;
+
   return (
     <Card className="shadow-lg border-red-100">
       <CardHeader className="bg-gradient-to-r from-red-900 to-red-800 text-white rounded-t-lg">
         <CardTitle className="flex items-center gap-2">
           <Calculator className="h-5 w-5" />
-          Cost Calculator - {selectedProject === "all" ? "All Projects" : selectedProject}
+          Cost Calculator - {selectedProject}
         </CardTitle>
       </CardHeader>
       <CardContent className="p-6">
@@ -149,7 +130,7 @@ export const CostCalculator = ({ data, selectedProject }: CostCalculatorProps) =
               <DollarSign className="h-5 w-5 text-green-600" />
             </div>
             <div className="text-2xl font-bold text-green-900">
-              {costs.totalCost.toLocaleString()} AED
+              {totalCost.toLocaleString()} AED
             </div>
           </div>
 
@@ -160,7 +141,7 @@ export const CostCalculator = ({ data, selectedProject }: CostCalculatorProps) =
               <TrendingUp className="h-5 w-5 text-blue-600" />
             </div>
             <div className="text-2xl font-bold text-blue-900">
-              {costs.breakdown.labourCost.toLocaleString()} AED
+              {labourCost.toLocaleString()} AED
             </div>
           </div>
 
@@ -171,7 +152,7 @@ export const CostCalculator = ({ data, selectedProject }: CostCalculatorProps) =
               <PieChart className="h-5 w-5 text-purple-600" />
             </div>
             <div className="text-2xl font-bold text-purple-900">
-              {costs.breakdown.equipmentCost.toLocaleString()} AED
+              {equipmentCost.toLocaleString()} AED
             </div>
           </div>
 
@@ -182,7 +163,7 @@ export const CostCalculator = ({ data, selectedProject }: CostCalculatorProps) =
               <TrendingUp className="h-5 w-5 text-orange-600" />
             </div>
             <div className="text-2xl font-bold text-orange-900">
-              {costs.breakdown.carCost.toLocaleString()} AED
+              {carCostTotal.toLocaleString()} AED
             </div>
           </div>
         </div>
@@ -192,19 +173,19 @@ export const CostCalculator = ({ data, selectedProject }: CostCalculatorProps) =
           <h3 className="text-lg font-semibold text-red-900 mb-4">Resource Allocation</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center">
-              <div className="text-2xl font-bold text-red-900">{costs.breakdown.qaEngineers}</div>
+              <div className="text-2xl font-bold text-red-900">{project.qaEngineerCount}</div>
               <Badge variant="outline" className="border-red-300 text-red-700">QA Engineers</Badge>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-red-900">{costs.breakdown.qaTechnicians}</div>
+              <div className="text-2xl font-bold text-red-900">{project.qaTechnicianCount}</div>
               <Badge variant="outline" className="border-red-300 text-red-700">QA Technicians</Badge>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-red-900">{costs.breakdown.laptops}</div>
+              <div className="text-2xl font-bold text-red-900">{project.laptopCount}</div>
               <Badge variant="outline" className="border-red-300 text-red-700">Laptops</Badge>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-red-900">{costs.breakdown.cars}</div>
+              <div className="text-2xl font-bold text-red-900">{project.carCount}</div>
               <Badge variant="outline" className="border-red-300 text-red-700">Cars</Badge>
             </div>
           </div>
