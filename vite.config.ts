@@ -5,7 +5,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: "/rahman-eand/",  // <-- add this line to fix asset loading paths
+  base: "./",  // <-- changed from "/rahman-eand/" to "./" for Vercel
   server: {
     host: "::",
     port: 8080,
