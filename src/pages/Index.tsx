@@ -1,4 +1,3 @@
-
 import { useState, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -72,15 +71,17 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 to-white">
       {/* Header */}
-      <div className="bg-red-900 text-white p-6 shadow-lg">
+      <div className="bg-red-900 text-white p-6 shadow-lg relative">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center gap-4 mb-2">
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex-1">
+              <h1 className="text-3xl font-bold">Field Operations Governance Dashboard</h1>
+            </div>
             <img 
-              src="/lovable-uploads/784dc15f-9c14-4254-94d4-cbc874804c85.png" 
-              alt="e& enterprise logo" 
-              className="h-12 w-auto"
+              src="/lovable-uploads/ee32fdb9-1e53-4f81-a049-5c41acb923bc.png" 
+              alt="Company logo" 
+              className="w-[10vw] h-[10vw] object-cover"
             />
-            <h1 className="text-3xl font-bold">Field Operations Governance Dashboard</h1>
           </div>
           <p className="text-red-100 text-lg">QA Scope and Resource Insights</p>
         </div>
