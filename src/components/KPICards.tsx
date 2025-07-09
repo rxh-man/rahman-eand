@@ -31,13 +31,6 @@ export const KPICards = ({ data }: KPICardsProps) => {
     return acc;
   }, 0);
 
-  const missingResourceTasks = data.filter(item =>
-    !item.labour || !item.equipment || !item.cars ||
-    item.labour === "Missing" || item.equipment === "Missing" || item.cars === "Missing"
-  ).length;
-
-  const missingResourcePercentage = totalTasks > 0 ? Math.round((missingResourceTasks / totalTasks) * 100) : 0;
-
   const kpis = [
     {
       title: "Total QA Tasks",
@@ -73,22 +66,13 @@ export const KPICards = ({ data }: KPICardsProps) => {
       trendValue: "5%",
       color: "bg-orange-500",
       unit: "Vehicles"
-    },
-    {
-      title: "Missing Resource Allocation",
-      value: `${missingResourcePercentage}%`,
-      icon: ArrowDown,
-      trend: missingResourcePercentage > 20 ? "down" : "up",
-      trendValue: `${missingResourceTasks} tasks`,
-      color: missingResourcePercentage > 20 ? "bg-red-500" : "bg-yellow-500",
-      isAlert: missingResourcePercentage > 20
     }
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       {kpis.map((kpi, index) => (
-        <Card key={index} className={`shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 ${kpi.isAlert ? 'border-red-300 bg-red-50' : 'border-red-100'}`}>
+        <Card key={index} className="shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-red-100">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium text-red-700 flex items-center justify-between">
               {kpi.title}
